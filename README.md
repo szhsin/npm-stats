@@ -19,6 +19,8 @@ Explore npm download totals for a package or an author's most popular packages o
 
 Click any package in an author's results to open its download total for the same month range.
 
+In a package's results, click **View on npm** to open its npm page in a new tab.
+
 ## Understanding the results
 
 **Date coverage.** All download counts come from npm. You can search history from January 2015 onward. Both selected months are included; the current month covers only the days available so far. Results indicate when a range includes a partial month.

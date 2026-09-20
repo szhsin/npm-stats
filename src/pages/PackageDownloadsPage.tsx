@@ -48,8 +48,19 @@ export function PackageDownloadsPage({ search }: { search: string }) {
       >
         {packageResult && (
           <div className="stat-box">
-            <div className="stat-label">
-              Total Downloads ({packageResult.packageName})
+            <div className="stat-heading">
+              <div className="stat-label">
+                Total Downloads ({packageResult.packageName})
+              </div>
+              <a
+                className="package-npm-link"
+                href={`https://www.npmjs.com/package/${packageResult.packageName}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View on npm: ${packageResult.packageName} (opens in a new tab)`}
+              >
+                View on npm <span aria-hidden="true">↗</span>
+              </a>
             </div>
             <div className="stat-value-huge">
               {formatNumber(packageResult.totalDownloads)}

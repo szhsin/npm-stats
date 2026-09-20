@@ -384,6 +384,33 @@
   overflow-wrap: anywhere;
 }
 
+.stat-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.package-npm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  font-size: 0.8125rem;
+  color: var(--primary-text);
+  text-underline-offset: 3px;
+}
+
+.package-npm-link:hover {
+  color: var(--text-primary);
+}
+
+.package-npm-link:focus-visible {
+  outline: 2px solid var(--action-color);
+  outline-offset: 3px;
+}
+
 .stat-value-huge {
   font-family: var(--font-mono);
   font-size: clamp(1.25rem, 6vw, 2.25rem);
