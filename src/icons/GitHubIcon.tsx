@@ -1,10 +1,10 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 export const GitHubIcon = ({
   width = 16,
   height = 16,
-  fill = "currentColor",
-  viewBox = "0 0 16 16",
+  fill = 'currentColor',
+  viewBox = '0 0 16 16',
   ...props
 }: SVGProps<SVGSVGElement>) => (
   <svg width={width} height={height} viewBox={viewBox} fill={fill} {...props}>

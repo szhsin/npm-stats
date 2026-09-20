@@ -27,6 +27,7 @@ to GitHub Pages. See the README for features and usage. Use Node.js 24 and npm.
 ## Development
 
 - Install with `npm ci`; start the app with `npm run dev`.
+- Format with `npm run format`.
 - Keep changes focused and follow the surrounding code style. Reuse existing
   components, hooks, API helpers, and CSS tokens before adding abstractions or dependencies.
 - Keep `package-lock.json` in sync with package changes. Do not commit generated
@@ -52,4 +53,4 @@ to GitHub Pages. See the README for features and usage. Use Node.js 24 and npm.
   Preserve accessible labels, keyboard operation, and visible focus indicators.
   Check Safari/WebKit for native control changes when available; state testing limits.
 - For documentation-only changes, check accuracy, links, and whitespace; skip app tests.
-- Run `git diff --check` and report what changed, what was verified, and any unresolved issues.
+- Run `npm run format:check` and `git diff --check`; report changes, verification, and unresolved issues.

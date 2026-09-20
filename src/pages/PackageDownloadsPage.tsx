@@ -1,14 +1,14 @@
-import { hasPartialMonth } from "../api/npmDownloads";
-import { useDownloadRoute } from "../hooks/useDownloadRoute";
-import { usePackageDownloads } from "../hooks/usePackageDownloads";
-import { DownloadForm } from "../components/DownloadForm";
-import { QueryResult } from "../components/QueryResult";
-import { DownloadPeriod } from "../components/DownloadPeriod";
-import { TrendingIcon } from "../icons";
-import { formatNumber, formatCompactNumber } from "../utils/formatNumbers";
+import { hasPartialMonth } from '../api/npmDownloads';
+import { useDownloadRoute } from '../hooks/useDownloadRoute';
+import { usePackageDownloads } from '../hooks/usePackageDownloads';
+import { DownloadForm } from '../components/DownloadForm';
+import { QueryResult } from '../components/QueryResult';
+import { DownloadPeriod } from '../components/DownloadPeriod';
+import { TrendingIcon } from '../icons';
+import { formatNumber, formatCompactNumber } from '../utils/formatNumbers';
 
 export function PackageDownloadsPage({ search }: { search: string }) {
-  const route = useDownloadRoute("package", search);
+  const route = useDownloadRoute('package', search);
   const {
     data: packageResult,
     isPending,
@@ -37,8 +37,8 @@ export function PackageDownloadsPage({ search }: { search: string }) {
         enabled={route.enabled}
         idleMessage={
           route.months.error
-            ? "Choose a valid month range to view downloads."
-            : "Enter an npm package name to view downloads."
+            ? 'Choose a valid month range to view downloads.'
+            : 'Enter an npm package name to view downloads.'
         }
         isFetching={isFetching}
         isPending={isPending}
@@ -61,8 +61,7 @@ export function PackageDownloadsPage({ search }: { search: string }) {
             <div className="stat-subtext">
               <TrendingIcon width={14} height={14} />
               <span>
-                Approx.{" "}
-                {formatCompactNumber(packageResult.totalDownloads)} npm
+                Approx. {formatCompactNumber(packageResult.totalDownloads)} npm
                 downloads in this range
               </span>
             </div>

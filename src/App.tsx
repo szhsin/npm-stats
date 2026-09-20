@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
-import { Link, Route, Switch, useRoute, useSearch } from "wouter";
-import "./App.css";
-import { SunIcon, MoonIcon, PackageIcon, UserIcon, GitHubIcon } from "./icons";
-import { PackageDownloadsPage } from "./pages/PackageDownloadsPage";
-import { AuthorDownloadsPage } from "./pages/AuthorDownloadsPage";
+import { useState, useEffect } from 'react';
+import { Link, Route, Switch, useRoute, useSearch } from 'wouter';
+import './App.css';
+import { SunIcon, MoonIcon, PackageIcon, UserIcon, GitHubIcon } from './icons';
+import { PackageDownloadsPage } from './pages/PackageDownloadsPage';
+import { AuthorDownloadsPage } from './pages/AuthorDownloadsPage';
 
 function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [isPackagePage] = useRoute("/");
-  const [isAuthorPage] = useRoute("/author");
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [isPackagePage] = useRoute('/');
+  const [isAuthorPage] = useRoute('/author');
   const search = useSearch();
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((previous) => (previous === "dark" ? "light" : "dark"));
+    setTheme((previous) => (previous === 'dark' ? 'light' : 'dark'));
   };
 
   return (
@@ -37,7 +37,7 @@ function App() {
             onClick={toggleTheme}
             title="Toggle Light / Dark Theme"
           >
-            {theme === "dark" ? (
+            {theme === 'dark' ? (
               <>
                 <SunIcon width={16} height={16} />
                 <span>Light Mode</span>
@@ -55,16 +55,16 @@ function App() {
       <nav className="view-tabs" aria-label="Download statistics">
         <Link
           href="/"
-          className={`tab-btn ${isPackagePage ? "active" : ""}`}
-          aria-current={isPackagePage ? "page" : undefined}
+          className={`tab-btn ${isPackagePage ? 'active' : ''}`}
+          aria-current={isPackagePage ? 'page' : undefined}
         >
           <PackageIcon width={16} height={16} />
           Package
         </Link>
         <Link
           href="/author"
-          className={`tab-btn ${isAuthorPage ? "active" : ""}`}
-          aria-current={isAuthorPage ? "page" : undefined}
+          className={`tab-btn ${isAuthorPage ? 'active' : ''}`}
+          aria-current={isAuthorPage ? 'page' : undefined}
         >
           <UserIcon width={16} height={16} />
           Author
@@ -97,7 +97,12 @@ function App() {
           rel="noopener noreferrer"
           aria-label="View on GitHub: szhsin/npm-stats (opens in a new tab)"
         >
-          <GitHubIcon width={18} height={18} aria-hidden="true" focusable="false" />
+          <GitHubIcon
+            width={18}
+            height={18}
+            aria-hidden="true"
+            focusable="false"
+          />
           <span>View on GitHub</span>
           <svg
             width="14"

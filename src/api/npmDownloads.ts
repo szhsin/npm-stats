@@ -1,4 +1,4 @@
-import { fetchNpmJson } from "./npmFetch.ts";
+import { fetchNpmJson } from './npmFetch.ts';
 
 export interface MonthRange {
   startMonth: string;
@@ -27,28 +27,28 @@ interface DownloadPoint extends DownloadRange {
 
 function isDownloadPoint(value: unknown): value is DownloadPoint {
   return (
-    typeof value === "object" &&
+    typeof value === 'object' &&
     value !== null &&
-    "downloads" in value &&
-    typeof value.downloads === "number" &&
+    'downloads' in value &&
+    typeof value.downloads === 'number' &&
     Number.isSafeInteger(value.downloads) &&
     value.downloads >= 0 &&
-    "package" in value &&
-    typeof value.package === "string" &&
-    "start" in value &&
-    typeof value.start === "string" &&
-    "end" in value &&
-    typeof value.end === "string"
+    'package' in value &&
+    typeof value.package === 'string' &&
+    'start' in value &&
+    typeof value.start === 'string' &&
+    'end' in value &&
+    typeof value.end === 'string'
   );
 }
 
-export const FIRST_DOWNLOAD_MONTH = "2015-01";
-const FIRST_DOWNLOAD_DATE = "2015-01-10";
+export const FIRST_DOWNLOAD_MONTH = '2015-01';
+const FIRST_DOWNLOAD_DATE = '2015-01-10';
 const MAX_MONTHS_PER_REQUEST = 18;
 const MONTH_PATTERN = /^\d{4}-(0[1-9]|1[0-2])$/;
 
 function monthIndex(month: string): number {
-  const [year, monthNumber] = month.split("-").map(Number);
+  const [year, monthNumber] = month.split('-').map(Number);
   return year * 12 + monthNumber - 1;
 }
 
@@ -79,19 +79,19 @@ export function getMonthRangeError(
   now = new Date(),
 ): string | undefined {
   if (!MONTH_PATTERN.test(startMonth) || !MONTH_PATTERN.test(endMonth)) {
-    return "Choose a valid start and end month.";
+    return 'Choose a valid start and end month.';
   }
   if (startMonth > endMonth) {
-    return "Start month must be on or before end month.";
+    return 'Start month must be on or before end month.';
   }
   if (startMonth < FIRST_DOWNLOAD_MONTH) {
-    return "npm download history starts in January 2015.";
+    return 'npm download history starts in January 2015.';
   }
   if (endMonth > getMonthRangeDefaults(now).maxMonth) {
-    return "Choose a month with available download history.";
+    return 'Choose a month with available download history.';
   }
   if (`${startMonth}-01` > latestDownloadDate(now)) {
-    return "Download data is not available for this month yet.";
+    return 'Download data is not available for this month yet.';
   }
 }
 
@@ -115,7 +115,10 @@ export function createDownloadRanges(
     startIndex <= endIndex;
     startIndex += MAX_MONTHS_PER_REQUEST
   ) {
-    const nextIndex = Math.min(startIndex + MAX_MONTHS_PER_REQUEST, endIndex + 1);
+    const nextIndex = Math.min(
+      startIndex + MAX_MONTHS_PER_REQUEST,
+      endIndex + 1,
+    );
     // npm's endpoints are inclusive: end on the day before the next chunk.
     const start = monthDate(startIndex);
     const end = monthDate(nextIndex, 0);
@@ -129,10 +132,10 @@ export function createDownloadRanges(
 }
 
 export function formatMonthRange(startMonth: string, endMonth: string): string {
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
   });
   const start = formatter.format(new Date(`${startMonth}-01T00:00:00Z`));
   return startMonth === endMonth
@@ -157,7 +160,7 @@ export async function fetchPackageDownloads(
     packageName.length > 214 ||
     !/^(@[a-z0-9~][a-z0-9._~-]*\/)?[a-z0-9~][a-z0-9._~-]*$/i.test(packageName)
   ) {
-    throw new Error("Enter a package name such as react or @scope/package.");
+    throw new Error('Enter a package name such as react or @scope/package.');
   }
 
   const ranges = createDownloadRanges(query.startMonth, query.endMonth, now);
@@ -184,7 +187,9 @@ export async function fetchPackageDownloads(
                 point.end > end ||
                 (point.end !== end && end !== latestDownloadDate(now))
               ) {
-                throw new Error("npm returned unexpected download data. Please retry.");
+                throw new Error(
+                  'npm returned unexpected download data. Please retry.',
+                );
               }
               return point;
             },
@@ -196,7 +201,10 @@ export async function fetchPackageDownloads(
     return {
       ...query,
       packageName,
-      totalDownloads: points.reduce((total, point) => total + point.downloads, 0),
+      totalDownloads: points.reduce(
+        (total, point) => total + point.downloads,
+        0,
+      ),
       startDate: points[0].start,
       endDate: points[points.length - 1].end,
     };

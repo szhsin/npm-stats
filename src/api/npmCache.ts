@@ -1,4 +1,4 @@
-const CACHE_PREFIX = "npm-stats:json:v1:";
+const CACHE_PREFIX = 'npm-stats:json:v1:';
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const MAX_CACHE_ENTRIES = 200;
 
@@ -14,9 +14,11 @@ function readEntry(storage: Storage, key: string): CacheEntry | undefined {
   try {
     const entry: unknown = JSON.parse(raw);
     if (
-      typeof entry === "object" && entry !== null &&
-      "storedAt" in entry && typeof entry.storedAt === "number" &&
-      "data" in entry
+      typeof entry === 'object' &&
+      entry !== null &&
+      'storedAt' in entry &&
+      typeof entry.storedAt === 'number' &&
+      'data' in entry
     ) {
       const age = Date.now() - entry.storedAt;
       if (age >= 0 && age < CACHE_TTL_MS) {
@@ -29,8 +31,11 @@ function readEntry(storage: Storage, key: string): CacheEntry | undefined {
   storage.removeItem(key);
 }
 
-export function readNpmCache<T>(url: string, parse: (data: unknown) => T): T | undefined {
-  if (!("window" in globalThis)) return;
+export function readNpmCache<T>(
+  url: string,
+  parse: (data: unknown) => T,
+): T | undefined {
+  if (!('window' in globalThis)) return;
   try {
     const storage = globalThis.localStorage;
     const key = CACHE_PREFIX + url;
@@ -48,7 +53,7 @@ export function readNpmCache<T>(url: string, parse: (data: unknown) => T): T | u
 }
 
 export function writeNpmCache(url: string, data: unknown): void {
-  if (!("window" in globalThis)) return;
+  if (!('window' in globalThis)) return;
   try {
     const storage = globalThis.localStorage;
     const key = CACHE_PREFIX + url;
@@ -56,12 +61,16 @@ export function writeNpmCache(url: string, data: unknown): void {
     // Prune expired data and bound storage without touching other app settings.
     for (let index = storage.length - 1; index >= 0; index--) {
       const existingKey = storage.key(index);
-      if (!existingKey?.startsWith(CACHE_PREFIX) || existingKey === key) continue;
+      if (!existingKey?.startsWith(CACHE_PREFIX) || existingKey === key)
+        continue;
       const entry = readEntry(storage, existingKey);
       if (entry) entries.push({ key: existingKey, storedAt: entry.storedAt });
     }
     entries.sort((a, b) => a.storedAt - b.storedAt);
-    for (const entry of entries.slice(0, Math.max(0, entries.length - MAX_CACHE_ENTRIES + 1))) {
+    for (const entry of entries.slice(
+      0,
+      Math.max(0, entries.length - MAX_CACHE_ENTRIES + 1),
+    )) {
       storage.removeItem(entry.key);
     }
     storage.setItem(key, JSON.stringify({ storedAt: Date.now(), data }));

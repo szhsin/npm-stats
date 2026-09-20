@@ -1,4 +1,4 @@
-import { readNpmCache, writeNpmCache } from "./npmCache.ts";
+import { readNpmCache, writeNpmCache } from './npmCache.ts';
 
 interface NpmFetchOptions<T> {
   parse: (data: unknown) => T;
@@ -9,7 +9,12 @@ interface NpmFetchOptions<T> {
 
 export async function fetchNpmJson<T>(
   url: string,
-  { parse, signal, resource = "downloads", notFoundMessage }: NpmFetchOptions<T>,
+  {
+    parse,
+    signal,
+    resource = 'downloads',
+    notFoundMessage,
+  }: NpmFetchOptions<T>,
 ): Promise<T> {
   signal?.throwIfAborted();
   const cached = readNpmCache(url, parse);
@@ -19,7 +24,7 @@ export async function fetchNpmJson<T>(
     if (signal?.aborted) throw error;
     // CORS failures hide the response status, including possible rate limits.
     throw new Error(
-      "The request to npm failed. It may be rate limited or affected by a connection issue. Please wait and try again later.",
+      'The request to npm failed. It may be rate limited or affected by a connection issue. Please wait and try again later.',
       { cause: error },
     );
   });
@@ -30,7 +35,7 @@ export async function fetchNpmJson<T>(
     }
     if (response.status === 429) {
       throw new Error(
-        "Rate limited by npm (HTTP 429). Please wait and try again later.",
+        'Rate limited by npm (HTTP 429). Please wait and try again later.',
       );
     }
     throw new Error(
@@ -40,7 +45,7 @@ export async function fetchNpmJson<T>(
 
   const data: unknown = await response.json().catch(() => {
     signal?.throwIfAborted();
-    throw new Error("npm returned an invalid response. Please retry.");
+    throw new Error('npm returned an invalid response. Please retry.');
   });
   signal?.throwIfAborted();
   const result = parse(data);

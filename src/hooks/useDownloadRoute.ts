@@ -1,13 +1,13 @@
-import { useState, type FormEvent } from "react";
-import { useLocation } from "wouter";
-import { getMonthRangeError } from "../api/npmDownloads";
+import { useState, type FormEvent } from 'react';
+import { useLocation } from 'wouter';
+import { getMonthRangeError } from '../api/npmDownloads';
 import {
   createDownloadUrl,
   normalizeDownloadName,
   readDownloadSearch,
   type DownloadTab,
-} from "../routing/downloadRoutes";
-import { useMonthRange } from "./useMonthRange";
+} from '../routing/downloadRoutes';
+import { useMonthRange } from './useMonthRange';
 
 // Route pages are keyed by their search string to restore form state on navigation.
 export function useDownloadRoute(tab: DownloadTab, search: string) {

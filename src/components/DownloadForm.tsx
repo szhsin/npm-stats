@@ -1,21 +1,21 @@
-import type { FormEvent, ReactNode } from "react";
-import type { useDownloadRoute } from "../hooks/useDownloadRoute";
-import type { DownloadTab } from "../routing/downloadRoutes";
-import { DownloadIcon, PackageIcon, SearchIcon, UserIcon } from "../icons";
-import { MonthRangeSelector } from "./MonthRangeSelector";
+import type { FormEvent, ReactNode } from 'react';
+import type { useDownloadRoute } from '../hooks/useDownloadRoute';
+import type { DownloadTab } from '../routing/downloadRoutes';
+import { DownloadIcon, PackageIcon, SearchIcon, UserIcon } from '../icons';
+import { MonthRangeSelector } from './MonthRangeSelector';
 
 const fields = {
   package: {
-    label: "Package Name",
-    placeholder: "Enter package name (e.g. react, express, lodash)...",
-    buttonLabel: "Get Total Downloads",
+    label: 'Package Name',
+    placeholder: 'Enter package name (e.g. react, express, lodash)...',
+    buttonLabel: 'Get Total Downloads',
     TitleIcon: PackageIcon,
     InputIcon: SearchIcon,
   },
   author: {
-    label: "Author Name",
-    placeholder: "Enter author username (e.g. sindresorhus, tj)...",
-    buttonLabel: "Get Downloads by Author",
+    label: 'Author Name',
+    placeholder: 'Enter author username (e.g. sindresorhus, tj)...',
+    buttonLabel: 'Get Downloads by Author',
     TitleIcon: UserIcon,
     InputIcon: UserIcon,
   },
@@ -67,7 +67,7 @@ export function DownloadForm({
             disabled={isFetching || !route.canSubmit}
           >
             <DownloadIcon width={18} height={18} />
-            {isFetching ? "Loading Downloads…" : buttonLabel}
+            {isFetching ? 'Loading Downloads…' : buttonLabel}
           </button>
         </div>
         <MonthRangeSelector

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export const UserIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
   width = 16,
   height = 16,
-  stroke = "currentColor",
+  stroke = 'currentColor',
   strokeWidth = 2,
-  fill = "none",
-  viewBox = "0 0 24 24",
+  fill = 'none',
+  viewBox = '0 0 24 24',
   ...props
 }) => (
   <svg

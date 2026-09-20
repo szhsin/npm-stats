@@ -2,7 +2,7 @@ import {
   FIRST_DOWNLOAD_MONTH,
   getMonthRangeDefaults,
   type MonthRange,
-} from "../api/npmDownloads";
+} from '../api/npmDownloads';
 
 interface MonthRangeSelectorProps {
   idPrefix: string;
@@ -22,23 +22,27 @@ export function MonthRangeSelector({
   const { maxMonth } = getMonthRangeDefaults();
   const includesFirstMonth = range.startMonth === FIRST_DOWNLOAD_MONTH;
   const hint = error
-    ? ""
+    ? ''
     : [
         includesFirstMonth &&
-          "npm only provides download data from January 2015 onward.",
+          'npm only provides download data from January 2015 onward.',
         (includesFirstMonth || range.endMonth === maxMonth) &&
-          "This range includes a partial month.",
+          'This range includes a partial month.',
       ]
         .filter(Boolean)
-        .join(" ");
+        .join(' ');
 
   return (
     <>
-      <div className="month-range" role="group" aria-label="Download date range">
+      <div
+        className="month-range"
+        role="group"
+        aria-label="Download date range"
+      >
         {(
           [
-            ["startMonth", "From"],
-            ["endMonth", "To"],
+            ['startMonth', 'From'],
+            ['endMonth', 'To'],
           ] as const
         ).map(([field, label]) => (
           <label
