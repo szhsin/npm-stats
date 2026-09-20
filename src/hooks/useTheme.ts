@@ -18,7 +18,11 @@ export function useTheme() {
     subscribeToSystemTheme,
     getSystemTheme,
   );
-  const [override, setOverride] = useState<Theme | null>(null);
+  const [override, setOverride] = useState<Theme | null>(() => {
+    // Reuse the choice applied by index.html before the first paint.
+    const savedTheme = document.documentElement.getAttribute('data-theme');
+    return savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : null;
+  });
   const theme = override ?? systemTheme;
 
   useLayoutEffect(() => {
@@ -31,7 +35,14 @@ export function useTheme() {
   }, [override]);
 
   const toggleTheme = () => {
-    setOverride(theme === 'dark' ? 'light' : 'dark');
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setOverride(nextTheme);
+    try {
+      // Keep this key in sync with the startup script in index.html.
+      localStorage.setItem('npm-stats-theme', nextTheme);
+    } catch {
+      // The toggle still works for this page when storage is unavailable.
+    }
   };
 
   return { theme, toggleTheme };
