@@ -241,11 +241,6 @@
   background: var(--bg-input);
   color: var(--text-primary);
   font: inherit;
-  color-scheme: light;
-}
-
-[data-theme='dark'] .month-input {
-  color-scheme: dark;
 }
 
 .month-input:focus-visible,

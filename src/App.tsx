@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react';
 import { Link, Route, Switch, useRoute, useSearch } from 'wouter';
 import './App.css';
 import { SunIcon, MoonIcon, PackageIcon, UserIcon, GitHubIcon } from './icons';
 import { PackageDownloadsPage } from './pages/PackageDownloadsPage';
 import { AuthorDownloadsPage } from './pages/AuthorDownloadsPage';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const { theme, toggleTheme } = useTheme();
   const [isPackagePage] = useRoute('/');
   const [isAuthorPage] = useRoute('/author');
   const search = useSearch();
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((previous) => (previous === 'dark' ? 'light' : 'dark'));
-  };
 
   return (
     <div className="app-container">

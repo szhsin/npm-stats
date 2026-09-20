@@ -8,7 +8,7 @@ Explore npm download totals for a package or an author's most popular packages o
 - **Explore an author:** View up to 10 popular packages, their individual download counts, and a combined total.
 - **Choose your period:** Search a single month, a full year, or several years using the **From** and **To** month selectors.
 - **Share a search:** Copy the page address to share or bookmark a package or author with the selected months. Use your browser's Back and Forward buttons to revisit searches.
-- **Use it on any screen:** Browse on desktop or mobile and switch between light and dark themes.
+- **Use it on any screen:** Browse on desktop or mobile with a theme that follows your device's light or dark setting, including changes while the page is open. The theme button overrides it until you refresh the page.
 
 ## Getting started
 
