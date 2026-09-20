@@ -396,7 +396,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  min-height: 32px;
+  min-height: 24px;
   font-size: 0.8125rem;
   color: var(--primary-text);
   text-underline-offset: 3px;
