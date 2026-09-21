@@ -1,42 +1,46 @@
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
   --font-sans:
     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Light Theme Colors */
-  --bg-main: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --bg-input: #ffffff;
-  --bg-subtle: #f1f5f9;
-  --bg-badge: #e0e7ff;
+  /* Theme Colors (light, dark) */
+  --bg-main: light-dark(#f8fafc, #0b0f19);
+  --bg-card: light-dark(#ffffff, #151c2c);
+  --bg-card-hover: light-dark(#f1f5f9, #1e293b);
+  --bg-input: light-dark(#ffffff, #1e293b);
+  --bg-subtle: light-dark(#f1f5f9, #1e293b);
+  --bg-badge: light-dark(#e0e7ff, #1e1b4b);
 
-  --border-color: #e2e8f0;
-  --border-focus: #6366f1;
+  --border-color: light-dark(#e2e8f0, #27354a);
+  --border-focus: light-dark(#6366f1, #818cf8);
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-badge: #4338ca;
+  --text-primary: light-dark(#0f172a, #f8fafc);
+  --text-secondary: light-dark(#475569, #94a3b8);
+  --text-muted: light-dark(#94a3b8, #64748b);
+  --text-badge: light-dark(#4338ca, #a5b4fc);
 
   /* Brand & Accent Colors */
-  --primary: #cb3837; /* npm red */
-  --primary-hover: #b02e2d;
-  --primary-light: #fef2f2;
-  --primary-border: #fecaca;
-  --primary-text: #991b1b;
+  --primary: light-dark(#cb3837, #ef4444); /* npm red */
+  --primary-hover: light-dark(#b02e2d, #dc2626);
+  --primary-light: light-dark(#fef2f2, rgba(239, 68, 68, 0.15));
+  --primary-border: light-dark(#fecaca, rgba(239, 68, 68, 0.3));
+  --primary-text: light-dark(#991b1b, #fca5a5);
 
   --accent-purple: #6366f1;
   --accent-purple-light: #eeef4f;
   --accent-green: #10b981;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.4));
   --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    0 4px 6px -1px light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3)),
+    0 2px 4px -2px light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
   --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
-  --shadow-glow: 0 0 20px rgba(203, 56, 55, 0.15);
+    0 10px 15px -3px light-dark(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.5)),
+    0 4px 6px -4px light-dark(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.5));
+  --shadow-glow-blur: 20px;
+  --shadow-glow: 0 0 var(--shadow-glow-blur)
+    light-dark(rgba(203, 56, 55, 0.15), rgba(239, 68, 68, 0.25));
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -44,67 +48,19 @@
   --radius-xl: 24px;
 }
 
-[data-theme='dark'] {
-  color-scheme: dark;
-  --bg-main: #0b0f19;
-  --bg-card: #151c2c;
-  --bg-card-hover: #1e293b;
-  --bg-input: #1e293b;
-  --bg-subtle: #1e293b;
-  --bg-badge: #1e1b4b;
-
-  --border-color: #27354a;
-  --border-focus: #818cf8;
-
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-badge: #a5b4fc;
-
-  --primary: #ef4444;
-  --primary-hover: #dc2626;
-  --primary-light: rgba(239, 68, 68, 0.15);
-  --primary-border: rgba(239, 68, 68, 0.3);
-  --primary-text: #fca5a5;
-
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px rgba(239, 68, 68, 0.25);
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --shadow-glow-blur: 25px;
+}
+
+/* The dark glow also changes size, which light-dark() cannot select. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    color-scheme: dark;
-    --bg-main: #0b0f19;
-    --bg-card: #151c2c;
-    --bg-card-hover: #1e293b;
-    --bg-input: #1e293b;
-    --bg-subtle: #1e293b;
-    --bg-badge: #1e1b4b;
-
-    --border-color: #27354a;
-    --border-focus: #818cf8;
-
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --text-badge: #a5b4fc;
-
-    --primary: #ef4444;
-    --primary-hover: #dc2626;
-    --primary-light: rgba(239, 68, 68, 0.15);
-    --primary-border: rgba(239, 68, 68, 0.3);
-    --primary-text: #fca5a5;
-
-    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-    --shadow-md:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-    --shadow-lg:
-      0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 25px rgba(239, 68, 68, 0.25);
+    --shadow-glow-blur: 25px;
   }
 }
 
