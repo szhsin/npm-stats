@@ -45,6 +45,7 @@ export function AuthorDownloadsPage({ search }: { search: string }) {
       </DownloadForm>
 
       <QueryResult
+        tab="author"
         enabled={route.enabled}
         idleMessage={
           route.months.error

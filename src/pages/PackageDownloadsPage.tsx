@@ -34,6 +34,7 @@ export function PackageDownloadsPage({ search }: { search: string }) {
       />
 
       <QueryResult
+        tab="package"
         enabled={route.enabled}
         idleMessage={
           route.months.error

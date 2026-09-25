@@ -213,6 +213,155 @@
   gap: 20px;
 }
 
+.loading-result,
+.result-skeleton,
+.skeleton-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loading-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--action-color);
+  border-radius: var(--radius-md);
+  background: var(--action-light);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.loading-indicator {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--action-color);
+  box-shadow: 0 0 0 4px var(--action-light);
+  animation: loading-pulse 1.6s ease-in-out infinite;
+}
+
+.loading-message {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.skeleton-bar {
+  display: block;
+  max-width: 100%;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--border-color) 25%,
+    var(--bg-card-hover) 50%,
+    var(--border-color) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s linear infinite;
+}
+
+.skeleton-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.skeleton-label {
+  width: 42%;
+  max-width: 220px;
+}
+
+.skeleton-link {
+  width: 96px;
+}
+
+.skeleton-number {
+  width: 55%;
+  max-width: 300px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+.skeleton-period {
+  width: 38%;
+  max-width: 180px;
+}
+
+.skeleton-caption {
+  width: 58%;
+  max-width: 260px;
+}
+
+.skeleton-stack {
+  flex: 1;
+  min-width: 0;
+  gap: 10px;
+}
+
+.skeleton-pill {
+  width: 100px;
+  height: 26px;
+  border-radius: 13px;
+}
+
+.skeleton-list-title {
+  width: 30%;
+  max-width: 180px;
+  margin-top: 4px;
+}
+
+.skeleton-package {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+.skeleton-package-name {
+  width: 35%;
+}
+
+.skeleton-package-count {
+  width: 18%;
+}
+
+.skeleton-package-desc {
+  width: 65%;
+}
+
+.skeleton-package-progress {
+  width: 85%;
+  height: 5px;
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@keyframes loading-pulse {
+  50% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-bar,
+  .loading-indicator {
+    animation: none;
+  }
+}
+
 .month-range {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
